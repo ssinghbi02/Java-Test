@@ -14,6 +14,7 @@ public class WriteCommandTest {
 	@Test
 	public void testWriteNewContentToFile() throws Exception{
 		CommandFactory.getCommand("write").execute("abc.txt", "shashank test content1");
+		Thread.sleep(2000);
 		
 		File file = new File(ICommand.filePath + "abc.txt");
 		FileReader fr = new FileReader(file.getAbsoluteFile());
@@ -26,7 +27,10 @@ public class WriteCommandTest {
 	@Test
 	public void testWriteContentToFileButItShouldBeOverridingNotAppending() throws Exception{
 		CommandFactory.getCommand("write").execute("abc.txt", "shashank test content1");
+		Thread.sleep(3000);
+		
 		CommandFactory.getCommand("write").execute("abc.txt", "shashank test content2");
+		Thread.sleep(3000);
 		
 		File file = new File(ICommand.filePath + "abc.txt");
 		FileReader fr = new FileReader(file.getAbsoluteFile());

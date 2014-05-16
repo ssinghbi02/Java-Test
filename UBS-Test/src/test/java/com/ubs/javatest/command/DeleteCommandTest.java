@@ -14,6 +14,7 @@ public class DeleteCommandTest {
 	@Test
 	public void testDeleteFile() throws Exception{
 		CommandFactory.getCommand("write").execute("delete.txt", "shashank test content1");
+		Thread.sleep(2000);
 		
 		File file = new File(ICommand.filePath + "delete.txt");
 		FileReader fr = new FileReader(file.getAbsoluteFile());
@@ -21,6 +22,8 @@ public class DeleteCommandTest {
 		Assert.assertEquals("shashank test content1", br.readLine());
 		
 		CommandFactory.getCommand("delete").execute("delete.txt", null);
+		Thread.sleep(2000);
+		
 		br.close();
 		
 		Assert.assertFalse(file.exists());
@@ -30,6 +33,8 @@ public class DeleteCommandTest {
 	public void testDeleteFileIfFileDoesNotExist() throws Exception{
 
 		CommandFactory.getCommand("delete").execute("noexist.txt", null);
+		Thread.sleep(2000);
+		
 		File file = new File(ICommand.filePath + "delete.txt");
 		Assert.assertFalse(file.exists());
 	}

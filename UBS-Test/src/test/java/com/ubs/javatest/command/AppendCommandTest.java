@@ -14,6 +14,7 @@ public class AppendCommandTest {
 	@Test
 	public void testAppendContentToFile() throws Exception{
 		CommandFactory.getCommand("append").execute("abc.txt", "shashank test content1");
+		Thread.sleep(2000);
 		
 		File file = new File(ICommand.filePath + "abc.txt");
 		FileReader fr = new FileReader(file.getAbsoluteFile());
@@ -26,14 +27,10 @@ public class AppendCommandTest {
 	@Test
 	public void testAppendContentToFileIsNotWritingToNewFileForNewRequest() throws Exception{
 		CommandFactory.getCommand("append").execute("abc.txt", "shashank test content1");
-		
-//		File file = new File(ICommand.filePath + "abc.txt");
-//		FileReader fr = new FileReader(file.getAbsoluteFile());
-//		BufferedReader br = new BufferedReader(fr);
-//		Assert.assertEquals("shashank test content1", br.readLine());
-//		br.close();
+		Thread.sleep(2000);
 		
 		CommandFactory.getCommand("append").execute("abc.txt", "+shashank test content2");
+		Thread.sleep(2000);
 		
 		File file2 = new File(ICommand.filePath + "abc.txt");
 		FileReader fr2 = new FileReader(file2.getAbsoluteFile());

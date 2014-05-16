@@ -1,6 +1,7 @@
 package com.ubs.javatest.command;
 
 import java.io.File;
+import java.util.concurrent.ExecutorService;
 
 /**
  * This command is used to remove the email content 
@@ -10,12 +11,27 @@ import java.io.File;
  */
 public class DeleteCommand implements ICommand{
 
+	ExecutorService executor;
+	
+	public DeleteCommand(ExecutorService executor) {
+		super();
+		this.executor = executor;
+	}
+	
 	@Override
-	public void execute(String fileName,String content) {
-			File file = new File(filePath+fileName);
-			if (file.exists()) {
-				file.delete();
+	public void execute(final String fileName,final String content) {
+		executor.submit(new Runnable() {
+			
+			@Override
+			public void run() {
+				File file = new File(filePath+fileName);
+				if (file.exists()) {
+					file.delete();
+				}
+				
 			}
+		});
+		
 	}
 
 }
