@@ -12,7 +12,7 @@ import com.ubs.javatest.command.WriteCommand;
 public class CommandFactoryTest {
 
 	@Test
-	public void test() {
+	public void testCommandCreation() {
 		ICommand writeCommand = CommandFactory.getCommand("write");
 		ICommand appendCommand = CommandFactory.getCommand("append");
 		ICommand deleteCommand = CommandFactory.getCommand("delete");
@@ -22,4 +22,8 @@ public class CommandFactoryTest {
 		Assert.assertTrue(deleteCommand instanceof DeleteCommand);
 	}
 
+	@Test(expected=IllegalArgumentException.class)
+	public void testCommandCreationShouldThowErrorOnCommandCreation() {
+		ICommand writeCommand = CommandFactory.getCommand("invalid");
+	}
 }

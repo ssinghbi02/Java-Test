@@ -20,6 +20,22 @@ public class WriteCommandTest {
 		BufferedReader br = new BufferedReader(fr);
 		Assert.assertEquals("shashank test content1", br.readLine());
 		br.close();
+		CommandFactory.getCommand("delete").execute("abc.txt", null);
+	}
+	
+	@Test
+	public void testWriteContentToFileButItShouldBeOverridingNotAppending() throws Exception{
+		CommandFactory.getCommand("write").execute("abc.txt", "shashank test content1");
+		CommandFactory.getCommand("write").execute("abc.txt", "shashank test content2");
+		
+		File file = new File(ICommand.filePath + "abc.txt");
+		FileReader fr = new FileReader(file.getAbsoluteFile());
+		BufferedReader br = new BufferedReader(fr);
+		Assert.assertEquals("shashank test content2", br.readLine());
+		br.close();
+		
+		
+		CommandFactory.getCommand("delete").execute("abc.txt", null);
 	}
 
 }

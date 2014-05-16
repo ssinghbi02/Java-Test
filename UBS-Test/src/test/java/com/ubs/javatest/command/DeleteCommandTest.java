@@ -19,9 +19,18 @@ public class DeleteCommandTest {
 		FileReader fr = new FileReader(file.getAbsoluteFile());
 		BufferedReader br = new BufferedReader(fr);
 		Assert.assertEquals("shashank test content1", br.readLine());
+		
 		CommandFactory.getCommand("delete").execute("delete.txt", null);
 		br.close();
 		
+		Assert.assertFalse(file.exists());
+	}
+	
+	@Test
+	public void testDeleteFileIfFileDoesNotExist() throws Exception{
+
+		CommandFactory.getCommand("delete").execute("noexist.txt", null);
+		File file = new File(ICommand.filePath + "delete.txt");
 		Assert.assertFalse(file.exists());
 	}
 

@@ -5,7 +5,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
+/**
+ * This command is used to write email content 
+ * to new file
+ * @author ssinghbi02
+ *
+ */
 public class WriteCommand implements ICommand {
 
 	@Override
@@ -20,7 +25,7 @@ public class WriteCommand implements ICommand {
 			bw.write(content);
 			bw.close();
 		} catch (IOException e) {
-			e.printStackTrace();
+			//log error e.printStackTrace();
 		}
 
 	}
